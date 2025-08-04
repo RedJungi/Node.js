@@ -1,0 +1,26 @@
+## 7/25 추가 사항
+
+- **node.js**: ssh를 사용해 Linux와 연결
+- **host: '192.168.10.131', // 연결할 리눅스 서버의 IP 주소**
+- **port: 22, // SSH 기본 포트 (22번)**
+- **username: 'hjg', //사용자 이름**
+- **userpassword: '1234', //사용자 비밀번호**
+
+## 8/1 추가 사항
+
+- **Node.js 학습 커밋**
+
+- **Express.js 서버 구현**
+- **SSH2를 이용한 리눅스 서버 연결**
+- **프로세스 정보 웹 API 제공**
+- **child_process를 이용한 시스템 명령어 실행**
+
+## 8/4 추가 사항
+
+- **Node.js 학습 커밋** -**WebSocket 실시간 통신 구현**
+
+- **WebSocket 서버 및 클라이언트 추가**
+- **Express + WebSocket 통합 서버 구현**
+- **실시간 양방향 메시징 시스템**
+- **package.json에 express, ws 종속성 추가**
+- **README.md 업데이트"**
