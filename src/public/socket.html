@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>리눅스 실시간 ps 모니터링</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/src/socketServer.js"></script>
+  </head>
+  <style>
+    body {
+      background: #111;
+      color: #0f0;
+    }
+    pre {
+      height: 80vh;
+      border: 1px solid #333;
+      background: #000;
+    }
+  </style>
+  <body>
+    <h1>리눅스 실시간 ps 모니터링</h1>
+    <pre id="ps"></pre>
+
+    <script>
+      const socket = io(); // Socket.IO 클라이언트 연결
+      const ps = document.getElementById("ps"); // ps를 표시할 요소
+
+      socket.on("ps", (data) => {
+        //ps 이벤트가 오면 실행
+        ps.textContent += data;
+        ps.scrollTop = ps.scrollHeight;
+      });
+
+      socket.on("error", (msg) => {
+        ps.textContent += `[ERROR] ${msg}\n`; // error 이벤트가 오면 실행
+      });
+    </script>
+  </body>
+</html>
