@@ -24,3 +24,8 @@
 - **실시간 양방향 메시징 시스템**
 - **package.json에 express, ws 종속성 추가**
 - **README.md 업데이트"**
+
+## 8/5 추가 사항
+
+- **socket.io로 변경 및 재구성 구현**
+- **node.js -> 리눅스 연결 확인(ssh)**
