@@ -1,38 +1,58 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
   <head>
     <meta charset="UTF-8" />
-    <title>리눅스 실시간 ps 모니터링</title>
-    <script src="/socket.io/socket.io.js"></script>
+    <title>SSH Terminal</title>
+    <style>
+      body {
+        background: #111;
+        color: #0f0;
+      }
+      #terminal {
+        height: 80vh;
+        border: 1px solid #333;
+        background: #000;
+        overflow-y: auto; /*세로 스크롤 생성*/
+        padding: 10px;
+        white-space: pre-wrap; /*줄바꿈 공백 유지 및 텍스트 줄바꿈*/
+      }
+      input {
+        background: #000;
+        color: #0f0;
+        border: 1px solid #333;
+      }
+    </style>
   </head>
-  <style>
-    body {
-      background: #111;
-      color: #0f0;
-    }
-    pre {
-      height: 80vh;
-      border: 1px solid #333;
-      background: #000;
-    }
-  </style>
   <body>
-    <h1>리눅스 실시간 ps 모니터링</h1>
-    <pre id="ps"></pre>
+    <h1>SSH Terminal</h1>
+    <div id="terminal"></div>
+    <input type="text" id="command" placeholder="명령어 입력" />
 
+    <script src="/socket.io/socket.io.js"></script>
     <script>
-      const socket = io.connect("http://localhost:8081", {
-        path: "/socket.io",
-      }); // Socket.IO 클라이언트 연결
+      const socket = io.connect("http://localhost:3000");
+      const terminal = document.getElementById("terminal"); //출력창
+      const command = document.getElementById("command"); //입력창
 
-      socket.on("ps", (data) => {
-        //ps 이벤트가 오면 실행
-        ps.textContent += data;
-        ps.scrollTop = ps.scrollHeight;
+      socket.on("output", (data) => {
+        terminal.textContent += data; //서버에서 받은 내용 추가
+        terminal.scrollTop = terminal.scrollHeight; //최신 출력 위치로 스크롤
       });
 
       socket.on("error", (msg) => {
-        ps.textContent += `[ERROR] ${msg}\n`; // error 이벤트가 오면 실행
+        terminal.textContent += `[ERROR] ${msg}\n`; //error 이벤트가 넘어오면 에러 메세지 출력
+      });
+
+      socket.on("status", (msg) => {
+        terminal.textContent += `[STATUS] ${msg}\n`; //status 이벤트가 넘어오면 상태 메세지 출력
+      });
+
+      command.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          // 엔터 키 입력 시
+          socket.emit("command", command.value); // 명령어 전송
+          command.value = ""; // 입력창 초기화
+        }
       });
     </script>
   </body>
