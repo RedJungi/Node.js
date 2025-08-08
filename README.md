@@ -1,6 +1,5 @@
 <div>
-  <img <img width="993" height="820" alt="스크린샷 2025-08-08 오전 11 12 37" src="https://github.com/user-attachments/assets/a69e9f26-e1fd-462d-8f31-2ed8c601c7f3" />
->
+  <img <img width="350"  alt="스크린샷 2025-08-08 오전 11 12 37" src="https://github.com/user-attachments/assets/a69e9f26-e1fd-462d-8f31-2ed8c601c7f3" />
 </div>
 
 
